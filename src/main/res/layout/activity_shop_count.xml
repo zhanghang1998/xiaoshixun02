@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20sp"
+    android:padding="2dp"
+    tools:context=".ShopCountActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="20sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="商品详情" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/imageView_shopCount_zhanshi"
+        android:layout_margin="20dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textView_shopCount_name"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="商品名字" />
+
+    <TextView
+        android:id="@+id/textView_shopCount_price"
+        android:layout_marginTop="6dp"
+        android:textSize="20sp"
+        android:textColor="#ff0000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="$159" />
+
+    <TextView
+        android:id="@+id/textView_shopCount_neirong"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="商品介绍" />
+
+</LinearLayout>
