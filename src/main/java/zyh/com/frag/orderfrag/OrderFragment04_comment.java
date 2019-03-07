@@ -59,7 +59,7 @@ public class OrderFragment04_comment extends Fragment {
         rOrderFrag04.setAdapter(orderFrag04Adapter);
 
         //开启数据请求
-        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),1,1,5);
+        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),4,1,10);
 
         return view;
     }

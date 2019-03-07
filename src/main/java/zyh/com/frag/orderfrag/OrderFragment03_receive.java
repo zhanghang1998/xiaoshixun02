@@ -58,7 +58,7 @@ public class OrderFragment03_receive extends Fragment {
         rOrderFrag03.setAdapter(orderFrag03Adapter);
 
         //开启数据请求
-        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),1,1,5);
+        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),3,1,10);
 
 
         return view;

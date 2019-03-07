@@ -58,7 +58,7 @@ public class OrderFragment01_all extends Fragment {
         recyclerView.setAdapter(orderFrag01Adapter);
 
         //开启数据请求
-        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),1,1,5);
+        //queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),0,1);
 
         return view;
     }

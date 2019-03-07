@@ -15,6 +15,9 @@ public class QueryShoppingPresenter extends BasePresenter{
     protected Observable observable(Object... args) {
 
         IRequest iRequest = NetWorkHttp.instance().create(IRequest.class);
+
+
+
         return iRequest.queryShopping((long)args[0],(String)args[1]);
     }
 }

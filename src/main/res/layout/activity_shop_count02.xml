@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShopCount02Activity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="312dp"
+                android:layout_height="274dp">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/goodsContentPage_ViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.youth.banner.Banner>
+
+                <Button
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="10dp"
+                    android:background="#666666"
+                    android:text="1/5"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/goodsContent_goods_Price"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:text="￥159"
+                    android:textColor="#ff00"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/goodsContent_goods_yiShou"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:text="已售11298件"
+                    android:textColor="#666666"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/goodsContent_goods_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="美克斯 (max)经典唇膏 子弹头口3g Chili 秀之色/小辣椒"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="重量" />
+
+                <TextView
+                    android:id="@+id/goodsContent_goods_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="1.85kg" />
+
+            </LinearLayout>
+
+            <!--商品详情-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="商品详情"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="4dp"
+                    android:background="#ff5e70" />
+
+            </LinearLayout>
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/goodsContent_product_contentImg"
+                android:layout_width="match_parent"
+                android:layout_height="306dp"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_20"
+                android:layout_marginTop="10dp"
+                android:text="产品介绍" />
+
+            <TextView
+                android:id="@+id/goodsContent_product_introductionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_10"
+                android:text="魅可(max) 经典唇膏,子弹头型" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/goodsContent_product_introductionImg"
+                android:layout_width="match_parent"
+                android:layout_height="306dp"
+                android:layout_marginTop="@dimen/dip_20"
+                android:src="@mipmap/ic_launcher" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="41dp"
+        android:layout_height="35dp"
+        android:id="@+id/linearLayout_che_addbur"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/goodscontent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/common_btn_add_n" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="41dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/goodscontent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/common_btn_buy_n" />
+
+    </LinearLayout>
+
+</RelativeLayout>

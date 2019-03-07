@@ -1,5 +1,6 @@
 package zyh.com.zhoukao01_lianxi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import zyh.com.adapter.myadapter.MyAddressAdapter;
 import zyh.com.bean.Result;
 import zyh.com.bean.UserInfo;
@@ -54,6 +56,19 @@ public class MyAddressActivity extends AppCompatActivity {
 
     }
 
+    //点击跳转新增页面
+    @OnClick(R.id.button_address_add)
+    public void instants(){
+        Intent intent = new Intent(this,AddMyAddressActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    //点击完成按钮
+    @OnClick(R.id.textView_myMessage_perfect)
+    public void freshs(){
+        finish();
+    }
 
     public class queryMyaddress implements DataCall<Result<List<MyAddressBean>>> {
 
@@ -64,6 +79,7 @@ public class MyAddressActivity extends AppCompatActivity {
             if (result.getStatus().equals("0000")) {
 
                 List<MyAddressBean> myAddressBeans = result.getResult();
+                myAddressAdapter.allClear();//清空集合
                 myAddressAdapter.addAll(myAddressBeans);
                 myAddressAdapter.notifyDataSetChanged();
 

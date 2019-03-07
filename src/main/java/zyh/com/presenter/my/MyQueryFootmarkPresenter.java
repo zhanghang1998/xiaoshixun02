@@ -18,6 +18,6 @@ public class MyQueryFootmarkPresenter extends BasePresenter {
 
         IRequest iRequest = NetWorkHttp.instance().create(IRequest.class);
 
-        return iRequest.browseList((long)args[0],(String)args[1],1,6);
+        return iRequest.browseList((long)args[0],(String)args[1],1,5);
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,11 @@ public class MyFootmarkAdapter extends RecyclerView.Adapter<MyFootmarkAdapter.My
         if (beanList!=null) {
             list.addAll(beanList);
         }
+    }
+
+    //清楚集合
+    public void CallClear(){
+        list.clear();
     }
 
     /**

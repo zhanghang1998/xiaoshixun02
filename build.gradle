@@ -4,8 +4,6 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 28
 
-
-
     defaultConfig {
         applicationId "zyh.com.zhoukao01_lianxi"
         minSdkVersion 15
@@ -15,10 +13,10 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //腾讯bugly
-        ndk {
+        /*ndk {
             // 设置支持的SO库架构
-            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-        }
+            //abiFilters 'armeabi', 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }*/
 
     }
 
@@ -26,6 +24,30 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    flavorDimensions "tier", "minApi"
+    productFlavors {
+        yingyongbao {
+            dimension "tier"
+        }
+        xiaomi {
+            dimension "minApi"
+        }
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->// each 改为 all
+            def fileName = "${variant.versionName}_${variant.productFlavors[0].name}_release.apk"
+            def outFile = output.outputFile
+            if (outFile != null && outFile.name.endsWith('.apk')) {
+                outputFileName = fileName  //  output.outputFile 改为 outputFileName
+            }
         }
     }
 
@@ -46,10 +68,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     //butterknife ; 控件注解依赖
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //rxjava依赖
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
@@ -85,9 +107,12 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport:latest.release'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
-
     //友盟
-    implementation  'com.umeng.umsdk:analytics:7.5.4'
-    implementation  'com.umeng.umsdk:common:1.5.4'
+    implementation 'com.umeng.umsdk:analytics:7.5.4'
+    implementation 'com.umeng.umsdk:common:1.5.4'
+    //选择地址依赖
+    implementation 'liji.library.dev:citypickerview:0.7.0'
+    //条目侧滑依赖
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 
 }

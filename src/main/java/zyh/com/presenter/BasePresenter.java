@@ -37,9 +37,6 @@ public abstract class BasePresenter {
                                 .observeOn(AndroidSchedulers.mainThread());
                     }
                 })
-                //没有异常处理的时候用这俩个方法
-                //.subscribeOn(Schedulers.newThread())
-                //.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Result>() {
                     @Override
                     public void accept(Result result) throws Exception {
@@ -58,7 +55,7 @@ public abstract class BasePresenter {
     public boolean isRunnimg(){
         return runnimg;
     }
-
+    //解绑方法
     public void unBind(){
         dataCall=null;
     }

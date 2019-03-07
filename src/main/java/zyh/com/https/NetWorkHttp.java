@@ -47,5 +47,4 @@ public class NetWorkHttp {
     public <T> T create(final Class<T> service){
         return retrofit.create(service);
     }
-
 }

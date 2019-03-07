@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
                     .putString("pas",pass).commit();
         }
 
-        requestPresenter.reqeust(mobile,MD5Utils.md5(pass));
-        //Log.v("zyh","<手机号:"+mobile+"><密码:"+MD5Utils.md5(pass)+">");
+        requestPresenter.reqeust(mobile,pass);
+
     }
 
     //数据回调 , 登录的

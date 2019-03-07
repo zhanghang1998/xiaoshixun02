@@ -103,8 +103,6 @@ public class OrderFrag01Adapter extends RecyclerView.Adapter<OrderFrag01Adapter.
         private final TextView textDanHao;
         private final TextView textTime;
         private final TextView textZongJia;
-        private final TextView textQuZhiFu;
-        private final TextView textQuXiao;
 
         public MyLoadler(@NonNull View itemView) {
             super(itemView);
@@ -121,8 +119,7 @@ public class OrderFrag01Adapter extends RecyclerView.Adapter<OrderFrag01Adapter.
             textDanHao = itemView.findViewById(R.id.text_frag04_orderfrag02_addNum);
             textTime = itemView.findViewById(R.id.text_frag04_orderfrag02_time);
             textZongJia = itemView.findViewById(R.id.text_frag04_orderfrag02_total);
-            textQuZhiFu = itemView.findViewById(R.id.button01_ordefrag02);
-            textQuXiao = itemView.findViewById(R.id.button02_ordefrag02);
+
         }
     }
 }

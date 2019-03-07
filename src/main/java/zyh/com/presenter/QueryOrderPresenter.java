@@ -6,6 +6,9 @@ import zyh.com.core.IRequest;
 import zyh.com.https.NetWorkHttp;
 
 public class QueryOrderPresenter extends BasePresenter {
+
+    private int page=1;
+
     public QueryOrderPresenter(DataCall dataCall) {
         super(dataCall);
     }
@@ -14,7 +17,9 @@ public class QueryOrderPresenter extends BasePresenter {
     protected Observable observable(Object... args) {
 
         IRequest iRequest = NetWorkHttp.instance().create(IRequest.class);
-        return iRequest.queryOrderFrag((long) args[0], (String) args[1],(int)args[2],(int)args[3],(int)args[4]);
+
+        //查询全部订单
+        return iRequest.queryOrderFrag((long) args[0], (String) args[1],0,page,10);
 
     }
 

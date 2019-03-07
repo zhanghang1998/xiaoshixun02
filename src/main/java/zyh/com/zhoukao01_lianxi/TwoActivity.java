@@ -43,7 +43,7 @@ public class TwoActivity extends AppCompatActivity {
             Toast.makeText(this, "输入框不能为空!",Toast.LENGTH_SHORT).show();
             return;
         }
-        presenter.reqeust(p,MD5Utils.md5(w));
+        presenter.reqeust(p,w);
     }
 
     public class register implements DataCall<Result> {

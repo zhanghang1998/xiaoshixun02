@@ -61,6 +61,11 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.MyLo
         }
     }
 
+    //清空集合数据
+    public void allClear(){
+        list.clear();
+    }
+
     /**
      * 内部类
      */

@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,37 +42,26 @@ public class OrderFrag03Adapter extends RecyclerView.Adapter<OrderFrag03Adapter.
     @Override
     public void onBindViewHolder(@NonNull OrderFrag03Adapter.MyLoadler myLoadler, int i) {
 
-        OrderListBean orderListBean = list.get(i);
+        final OrderListBean orderListBean = list.get(i);
         List<OrderFragbean> fragbeanList = orderListBean.getDetailList();
 
-        myLoadler.textDanHao.setText(orderListBean.getOrderId()+"");
-        myLoadler.textTime.setText("2018-12-31");
-        myLoadler.textZongJia.setText(orderListBean.getExpressCompName()+"");
-        myLoadler.textQuXiao.setText(orderListBean.getExpressSn()+"");
+        myLoadler.task_text_orderId.setText(orderListBean.getOrderId());
+        String times = new SimpleDateFormat("yyyy-MM-dd").format(
+                new java.util.Date(orderListBean.getOrderTime()));
+        myLoadler.task_text_time.setText(times);
+        myLoadler.task_text_CompName.setText(orderListBean.getExpressCompName());
+        myLoadler.task_text_expressSn.setText(orderListBean.getExpressSn());
+        BillItemRecyAdapter billItemRecyAdapter = new BillItemRecyAdapter(context);
+        billItemRecyAdapter.setList(fragbeanList);
+        myLoadler.task_button_affirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickNext!=null){
+                    mClickNext.next(orderListBean.getOrderId());
 
-        for (int j = 0; j < fragbeanList.size(); j++) {
-
-            if (j==0) {
-                OrderFragbean orderFragbean = fragbeanList.get(0);
-                //圈子图片需要切割一下子
-                String[] imageMy = orderFragbean.getCommodityPic().split(",");
-                myLoadler.simple01.setImageURI(Uri.parse(imageMy[0]));
-
-                myLoadler.textTitle01.setText(orderFragbean.getCommodityName()+"");
-                myLoadler.textPrice01.setText("￥"+orderFragbean.getCommodityPrice()+"");
-
-            } else if (j==1) {
-                OrderFragbean orderFragbean = fragbeanList.get(1);
-                //圈子图片需要切割一下子
-                String[] imageMy = orderFragbean.getCommodityPic().split(",");
-                myLoadler.simple02.setImageURI(Uri.parse(imageMy[0]));
-
-                myLoadler.textTitle02.setText(orderFragbean.getCommodityName()+"");
-                myLoadler.textPrice02.setText("￥"+orderFragbean.getCommodityPrice()+"");
+                }
             }
-
-        }
-
+        });
 
     }
 
@@ -91,37 +82,35 @@ public class OrderFrag03Adapter extends RecyclerView.Adapter<OrderFrag03Adapter.
      */
     public class MyLoadler extends RecyclerView.ViewHolder{
 
-        private final SimpleDraweeView simple01;
-        private final SimpleDraweeView simple02;
-        private final TextView textPrice01;
-        private final TextView textPrice02;
-        private final TextView textTitle01;
-        private final TextView textTitle02;
-        private final MyShoppingView layout01;
-        private final MyShoppingView layout02;
-        private final TextView textDanHao;
-        private final TextView textTime;
-        private final TextView textZongJia;
-        private final TextView textQuZhiFu;
-        private final TextView textQuXiao;
+        private final TextView task_text_orderId;
+        private final TextView task_text_time;
+        private final RecyclerView task_recy;
+        //快递公司
+        private final TextView task_text_CompName;
+        //快递单号
+        private final TextView task_text_expressSn;
+        //确认按钮
+        private final Button task_button_affirm;
 
         public MyLoadler(@NonNull View itemView) {
             super(itemView);
 
-            simple01 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_img);
-            simple02 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_img02);
-            textPrice01 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_price);
-            textPrice02 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_price02);
-            textTitle01 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_title);
-            textTitle02 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_title02);
-            layout01 = itemView.findViewById(R.id.frag04_orderfrag02_add_sub_layout);
-            layout02 = itemView.findViewById(R.id.frag04_orderfrag02_add_sub_layout02);
-
-            textDanHao = itemView.findViewById(R.id.text_frag04_orderfrag02_addNum);
-            textTime = itemView.findViewById(R.id.text_frag04_orderfrag02_time);
-            textZongJia = itemView.findViewById(R.id.text_frag04_orderfrag02_total);
-            textQuXiao = itemView.findViewById(R.id.button01_ordefrag02);
-            textQuZhiFu = itemView.findViewById(R.id.button02_ordefrag02);
+            task_text_orderId=itemView.findViewById(R.id.xrecy_task_item_text_orderId);//
+            task_text_time=itemView.findViewById(R.id.xrecy_task_item_text_orderTime);
+            task_text_CompName=itemView.findViewById(R.id.xrecy_task_item_text_CompName);
+            task_text_expressSn=itemView.findViewById(R.id.xrecy_task_item_text_expressSn);
+            task_button_affirm=itemView.findViewById(R.id.xrecy_task_item_button_affirm);
+            task_recy=itemView.findViewById(R.id.xrecy_task_item_recy);
         }
+    }
+
+
+    private ClickNext mClickNext;
+    public void setNext(ClickNext mClickNext){
+        this.mClickNext=mClickNext;
+    }
+    //确认收货的接口回调
+    public interface ClickNext{
+        void next(String orderId);
     }
 }

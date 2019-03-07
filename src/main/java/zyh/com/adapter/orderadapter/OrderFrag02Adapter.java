@@ -3,15 +3,19 @@ package zyh.com.adapter.orderadapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,40 +44,57 @@ public class OrderFrag02Adapter extends RecyclerView.Adapter<OrderFrag02Adapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderFrag02Adapter.MyLoadler myLoadler, int i) {
+    public void onBindViewHolder(@NonNull OrderFrag02Adapter.MyLoadler myLoadler, final int i) {
 
-        OrderListBean orderListBean = list.get(i);
+        final OrderListBean orderListBean = list.get(i);
         List<OrderFragbean> fragbeanList = orderListBean.getDetailList();
 
-        myLoadler.textDanHao.setText(orderListBean.getOrderId()+"");
-        myLoadler.textTime.setText("2018-12-31");
-        myLoadler.textZongJia.setText(orderListBean.getPayAmount()+"");
-
-        for (int j = 0; j < fragbeanList.size(); j++) {
-
-            if (j==0) {
-                OrderFragbean orderFragbean = fragbeanList.get(0);
-                //圈子图片需要切割一下子
-                String[] imageMy = orderFragbean.getCommodityPic().split(",");
-                myLoadler.simple01.setImageURI(Uri.parse(imageMy[0]));
-                //加减器
-                myLoadler.layout01.setCount(orderFragbean.getCommodityCount());
-                myLoadler.textTitle01.setText(orderFragbean.getCommodityName()+"");
-                myLoadler.textPrice01.setText("￥"+orderFragbean.getCommodityPrice()+"");
-
-            } else if (j==1) {
-                OrderFragbean orderFragbean = fragbeanList.get(1);
-                //圈子图片需要切割一下子
-                String[] imageMy = orderFragbean.getCommodityPic().split(",");
-                myLoadler.simple02.setImageURI(Uri.parse(imageMy[0]));
-                //加减器
-                myLoadler.layout02.setCount(orderFragbean.getCommodityCount());
-                myLoadler.textTitle02.setText(orderFragbean.getCommodityName()+"");
-                myLoadler.textPrice02.setText("￥"+orderFragbean.getCommodityPrice()+"");
-            }
-
+        myLoadler.pay_text_orderId.setText(orderListBean.getOrderId());
+        String times = new SimpleDateFormat("yyyy-MM-dd").format(
+                new java.util.Date(orderListBean.getOrderTime()));
+        myLoadler.pay_text_time.setText(times);
+        myLoadler.pay_text_allprice.setText(orderListBean.getPayAmount()+"");
+        //设置数量
+        int num=0;
+        for (int y=0;y<orderListBean.getDetailList().size();y++){
+            num+=orderListBean.getDetailList().get(y).getCommodityCount();
         }
+        myLoadler.pay_text_allnum.setText(""+num);
+        //删除订单
+        myLoadler.pay_button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickDelete!=null){
+                    mClickDelete.delete(orderListBean.getOrderId(),i);
+                }
 
+            }
+        });
+        //支付
+        myLoadler.pay_button_go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickGo!=null){
+                    mClickGo.go(orderListBean.getOrderId(),orderListBean.getPayAmount()+"");
+                }
+            }
+        });
+
+
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        myLoadler.pay_recy.setLayoutManager(linearLayoutManager);
+        BillItemRecyAdapter billItemRecyAdapter=new BillItemRecyAdapter(context);
+        billItemRecyAdapter.setList(orderListBean.getDetailList());
+        myLoadler.pay_recy.setAdapter(billItemRecyAdapter);
+        billItemRecyAdapter.setEva(new BillItemRecyAdapter.ClickEvaluate() {
+            @Override
+            public void setEvaluat(List<OrderFragbean> list, int position) {
+                if (mClickEvaluate!=null){
+                    mClickEvaluate.setEvaluat(list,position,orderListBean,i);
+                }
+            }
+        });
 
     }
 
@@ -94,37 +115,52 @@ public class OrderFrag02Adapter extends RecyclerView.Adapter<OrderFrag02Adapter.
      */
     public class MyLoadler extends RecyclerView.ViewHolder{
 
-        private final SimpleDraweeView simple01;
-        private final SimpleDraweeView simple02;
-        private final TextView textPrice01;
-        private final TextView textPrice02;
-        private final TextView textTitle01;
-        private final TextView textTitle02;
-        private final MyShoppingView layout01;
-        private final MyShoppingView layout02;
-        private final TextView textDanHao;
-        private final TextView textTime;
-        private final TextView textZongJia;
-        private final TextView textQuZhiFu;
-        private final TextView textQuXiao;
+        private TextView pay_text_orderId;
+        private TextView pay_text_time;
+        private RecyclerView pay_recy;
+        private TextView pay_text_allprice;
+        private TextView pay_text_allnum;
+        private Button pay_button_go;
+        private Button pay_button_cancel;
 
         public MyLoadler(@NonNull View itemView) {
             super(itemView);
 
-            simple01 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_img);
-            simple02 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_img02);
-            textPrice01 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_price);
-            textPrice02 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_price02);
-            textTitle01 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_title);
-            textTitle02 = itemView.findViewById(R.id.frag04_orderfrag02_goods_item_title02);
-            layout01 = itemView.findViewById(R.id.frag04_orderfrag02_add_sub_layout);
-            layout02 = itemView.findViewById(R.id.frag04_orderfrag02_add_sub_layout02);
-
-            textDanHao = itemView.findViewById(R.id.text_frag04_orderfrag02_addNum);
-            textTime = itemView.findViewById(R.id.text_frag04_orderfrag02_time);
-            textZongJia = itemView.findViewById(R.id.text_frag04_orderfrag02_total);
-            textQuZhiFu = itemView.findViewById(R.id.button01_ordefrag02);
-            textQuXiao = itemView.findViewById(R.id.button02_ordefrag02);
+            pay_text_orderId=itemView.findViewById(R.id.xrecy_pay_item_text_orderId);
+            pay_text_time=itemView.findViewById(R.id.xrecy_pay_item_text_orderTime);
+            pay_text_allprice=itemView.findViewById(R.id.xrecy_pay_item_text_allprice);
+            pay_text_allnum=itemView.findViewById(R.id.xrecy_pay_item_text_allnum);
+            pay_button_go=itemView.findViewById(R.id.xrecy_pay_item_button_go);
+            pay_button_cancel=itemView.findViewById(R.id.xrecy_pay_item_button_cancel);
+            pay_recy=itemView.findViewById(R.id.xrecy_pay_item_recy);
         }
     }
+
+
+    //支付
+    private ClickGo mClickGo;
+    public void setGo(ClickGo mClickGo){
+        this.mClickGo=mClickGo;
+    }
+    public interface ClickGo{
+        void go(String orderId,String all_price);
+    }
+
+    public ClickEvaluate mClickEvaluate;
+    public void setEva(ClickEvaluate mClickEvaluate){
+        this.mClickEvaluate=mClickEvaluate;
+    }
+    public interface ClickEvaluate{
+        void setEvaluat(List<OrderFragbean> list, int position, OrderListBean item, int i);
+    }
+
+    private ClickDelete mClickDelete;
+    public void setDelete(ClickDelete mClickDelete){
+        this.mClickDelete=mClickDelete;
+    }
+    //删除时候的接口回调
+    public interface ClickDelete{
+        void delete(String orderId,int position);
+    }
+
 }

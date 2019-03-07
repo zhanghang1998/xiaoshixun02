@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -27,9 +25,6 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import zyh.com.adapter.HomeMlssAdapter;
 import zyh.com.adapter.HomePzshAdapter;
 import zyh.com.adapter.HomeRexiaoAdapter;
@@ -44,7 +39,7 @@ import zyh.com.presenter.HomePresenter;
 import zyh.com.util.UIUtils;
 import zyh.com.zhoukao01_lianxi.R;
 import zyh.com.zhoukao01_lianxi.SearchActivity;
-import zyh.com.zhoukao01_lianxi.ShopCountActivity;
+import zyh.com.zhoukao01_lianxi.ShopCount02Activity;
 
 public class Fragment01_home extends Fragment implements View.OnClickListener {
 
@@ -90,7 +85,7 @@ public class Fragment01_home extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(int cid) {
                 Toast.makeText(getActivity(), cid + "", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), ShopCountActivity.class);
+                Intent intent = new Intent(getActivity(), ShopCount02Activity.class);
                 intent.putExtra("goodsId", cid);
                 startActivity(intent);
             }
@@ -99,6 +94,8 @@ public class Fragment01_home extends Fragment implements View.OnClickListener {
         rHomeMoli.setAdapter(homeMlssAdapter);//魔力时尚
         homePzshAdapter = new HomePzshAdapter(getActivity());
         rHomePinzhi.setAdapter(homePzshAdapter);//品质生活
+        //数据请求
+        homePresenter.reqeust();
 
         return view;
     }
@@ -122,15 +119,15 @@ public class Fragment01_home extends Fragment implements View.OnClickListener {
 
             if (data.getStatus().equals("0000")) {
                 //热销新品
-                List<CommodityListBean> rxxpList = data.getResult().getRxxp().get(0).getCommodityList();
+                List<CommodityListBean> rxxpList = data.getResult().getRxxp().getCommodityList();
                 rexiaoAdapter.addAll(rxxpList);
                 rexiaoAdapter.notifyDataSetChanged();//刷新适配器
                 //魔力时尚
-                List<CommodityListBean> mlssList1 = data.getResult().getMlss().get(0).getCommodityList();
+                List<CommodityListBean> mlssList1 = data.getResult().getMlss().getCommodityList();
                 homeMlssAdapter.addAll(mlssList1);
                 homeMlssAdapter.notifyDataSetChanged();//刷新适配器
                 //品质生活
-                List<CommodityListBean> pzshList1 = data.getResult().getPzsh().get(0).getCommodityList();
+                List<CommodityListBean> pzshList1 = data.getResult().getPzsh().getCommodityList();
                 homePzshAdapter.addAll(pzshList1);
                 homePzshAdapter.notifyDataSetChanged();//刷新适配器
             }

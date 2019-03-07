@@ -63,7 +63,7 @@ public class MyFootmarkActivity extends AppCompatActivity {
             if (result.getStatus().equals("0000")) {
 
                 List<MyFootmarkBean> myFootmarkBeans = result.getResult();
-
+                myFootmarkAdapter.CallClear();
                 myFootmarkAdapter.addAll(myFootmarkBeans);
                 myFootmarkAdapter.notifyDataSetChanged();
             }

@@ -58,7 +58,7 @@ public class OrderFragment05_perform extends Fragment {
         rOrderFrag05.setAdapter(orderFrag05Adapter);
 
         //开启数据请求
-        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),1,1,5);
+        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),5,1,10);
 
         return view;
     }

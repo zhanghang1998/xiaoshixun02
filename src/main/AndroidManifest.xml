@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="zyh.com.zhoukao01_lianxi">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -34,18 +35,20 @@
         <activity android:name=".MyWalletActivity" />
         <activity android:name=".MyAddressActivity" />
         <activity android:name=".MyCircleActivity" />
-        <activity android:name=".ShopCountActivity" />
         <activity android:name=".AddCircleActivity" />
-        <activity android:name=".WelActivity"></activity>
-
+        <activity android:name=".WelActivity" />
+        <activity android:name=".ShopCount02Activity" />
 
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5c3fd1bff1f556b610000014" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="ceshi" />
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
+        <activity android:name=".AddMyAddressActivity" />
+        <activity android:name=".CloseActivity" />
+        <activity android:name=".PlayMentActivity"></activity>
     </application>
 
 </manifest>

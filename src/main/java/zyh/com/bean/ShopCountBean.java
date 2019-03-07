@@ -1,6 +1,8 @@
 package zyh.com.bean;
 
-public class ShopCountBean {
+import java.io.Serializable;
+
+public class ShopCountBean implements Serializable {
 
     /**
      * categoryId : 1001002004

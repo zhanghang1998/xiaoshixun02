@@ -58,7 +58,7 @@ public class OrderFragment02_obligation extends Fragment {
         rOrderFrag02.setAdapter(orderFrag02Adapter);
 
         //开启数据请求
-        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),1,1,5);
+        queryOrderPresenter.reqeust(userInfo.getUserId(),userInfo.getSessionId(),2,1,510);
 
         return view;
     }

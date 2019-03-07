@@ -4,31 +4,31 @@ import java.util.List;
 
 public class HomeJson {
 
-    private List<HomeListBean> rxxp;
-    private List<HomeListBean> pzsh;
-    private List<HomeListBean> mlss;
+    private HomeListBean rxxp;
+    private HomeListBean pzsh;
+    private HomeListBean mlss;
 
-    public List<HomeListBean> getRxxp() {
+    public HomeListBean getRxxp() {
         return rxxp;
     }
 
-    public void setRxxp(List<HomeListBean> rxxp) {
+    public void setRxxp(HomeListBean rxxp) {
         this.rxxp = rxxp;
     }
 
-    public List<HomeListBean> getPzsh() {
+    public HomeListBean getPzsh() {
         return pzsh;
     }
 
-    public void setPzsh(List<HomeListBean> pzsh) {
+    public void setPzsh(HomeListBean pzsh) {
         this.pzsh = pzsh;
     }
 
-    public List<HomeListBean> getMlss() {
+    public HomeListBean getMlss() {
         return mlss;
     }
 
-    public void setMlss(List<HomeListBean> mlss) {
+    public void setMlss(HomeListBean mlss) {
         this.mlss = mlss;
     }
 }

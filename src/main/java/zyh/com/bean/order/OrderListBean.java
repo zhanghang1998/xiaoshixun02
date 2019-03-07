@@ -11,7 +11,16 @@ public class OrderListBean {
     private double payAmount;
     private int payMethod;
     private int userId;
+    private long orderTime;
     private List<OrderFragbean> detailList;
+
+    public long getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(long orderTime) {
+        this.orderTime = orderTime;
+    }
 
     public String getExpressCompName() {
         return expressCompName;

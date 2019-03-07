@@ -43,7 +43,6 @@ public class HomeRexiaoAdapter extends RecyclerView.Adapter<HomeRexiaoAdapter.My
         myHoadler.text02.setText(commodityListBean.getPrice() + "");
         //图片加载
         myHoadler.imag01.setImageURI(Uri.parse(commodityListBean.getMasterPic()));
-
         //条目点击
         myHoadler.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
